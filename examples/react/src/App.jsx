@@ -1,20 +1,15 @@
 import { Link, Route, Routes } from 'react-router-dom'
 
-//@ts-ignore
-const PagePathsWithComponents = import.meta.glob('./pages/*.tsx', { eager: true })
-//Example Output: 
-// const modules = {
-//   './pages/About.tsx': () => import('./pages/About.js'),
-//   './pages/Home.tsx': () => import('./pages/Home.tsx')
-// }
+// Auto generates routes from files under ./pages
+// https://vitejs.dev/guide/features.html#glob-import
+const pages = import.meta.glob('./pages/*.jsx', { eager: true })
 
-
-const routes = Object.keys(PagePathsWithComponents).map((path: string) => {
-  const name = path.match(/\.\/pages\/(.*)\.tsx$/)![1]
+const routes = Object.keys(pages).map((path) => {
+  const name = path.match(/\.\/pages\/(.*)\.jsx$/)[1]
   return {
     name,
     path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
-    component: PagePathsWithComponents[path].default
+    component: pages[path].default,
   }
 })
 
@@ -34,7 +29,7 @@ export function App() {
       </nav>
       <Routes>
         {routes.map(({ path, component: RouteComp }) => {
-          return <Route key={path} path={path} element={<RouteComp />}/>
+          return <Route key={path} path={path} element={<RouteComp />}></Route>
         })}
       </Routes>
     </>
