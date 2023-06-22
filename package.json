@@ -10,7 +10,8 @@
     "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
     "generate": "vite build --outDir dist/static && npm run build:server && node prerender",
     "serve": "cross-env NODE_ENV=production node server",
-    "debug": "node --inspect-brk server"
+    "debug": "node --inspect-brk server",
+    "preview": "vite preview"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -24,9 +25,10 @@
     "compression": "^1.7.4",
     "cross-env": "^7.0.3",
     "express": "^4.18.1",
+    "prettier": "^2.7.1",
+    "rollup-plugin-terser": "^7.0.2",
     "serve-static": "^1.15.0",
     "typescript": "^4.7.4",
-    "vite": "^3.0.0",
-    "prettier": "^2.7.1"
+    "vite": "^3.0.0"
   }
 }
